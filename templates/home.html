@@ -393,7 +393,7 @@
             const askQuestionBtn = document.querySelector('.ask-question-btn');
             askQuestionBtn.addEventListener('click', function() {
                 // Redirect to ask question page or show modal
-                window.location.href = '/ask';
+                window.location.href = "{{ url_for('ask_question') }}";
             });
 
             // Search functionality

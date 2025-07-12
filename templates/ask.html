@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask a Question - StackIt</title>
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: sans-serif;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ask a New Question</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <label>Title</label>
+            {{ form.title() }}
+            {% for error in form.title.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+
+            <label>Description</label>
+            {{ form.description(rows=8) }}
+            {% for error in form.description.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+
+            {{ form.submit() }}
+        </form>
+    </div>
+</body>
+</html>

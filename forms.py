@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import InputRequired, Length, EqualTo
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.validators import InputRequired, Length, EqualTo, DataRequired
 
 class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(3, 50)])
@@ -13,3 +13,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class AskQuestionForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(max=100)])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Ask')    #this form will be used for asking questions

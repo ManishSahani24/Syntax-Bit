@@ -1,8 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, AskQuestionForm
 from models import db, User
+from models import Question, db 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -56,6 +57,22 @@ def logout():
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/ask', methods=['GET', 'POST'])
+@login_required
+def ask_question():
+    form = AskQuestionForm()
+    if form.validate_on_submit():
+        question = Question(
+            title=form.title.data,
+            description=form.description.data,
+            user_id=current_user.id
+        )
+        db.session.add(question)
+        db.session.commit()
+        flash('Your question has been posted!', 'success')
+        return redirect(url_for('home'))
+    return render_template('ask.html', form=form)
 
 
 if __name__ == '__main__':
