@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Detail - StackIt</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --dark-green: #1b5e20;
+            --light-green: #e8f5e9;
+            --accent-green: #43a047;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: var(--primary-green) !important;
+        }
+
+        .btn-primary, .btn-success {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .btn-primary:hover, .btn-success:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+
+        .card-header {
+            background-color: var(--primary-green) !important;
+            color: white;
+        }
+
+        .tag {
+            background-color: var(--light-green);
+            color: var(--dark-green);
+        }
+
+        .answer-card {
+            border-left: 3px solid var(--primary-green);
+        }
+
+        .accepted-answer {
+            border-left: 3px solid var(--accent-green);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .vote-btn {
+            color: var(--dark-green);
+        }
+
+        .hljs {
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-layer-group me-2"></i>StackIt</a>
+            <div class="d-flex">
+                <button class="btn btn-outline-light me-2"><i class="fas fa-moon"></i></button>
+                <img src="https://via.placeholder.com/40" class="rounded-circle" alt="Profile">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Questions</a></li>
+                <li class="breadcrumb-item active" aria-current="page">SQL Column Join</li>
+            </ol>
+        </nav>
+
+        <!-- Question Section -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4>How to join 2 columns in a data set to make a separate column in SQL</h4>
+                <button class="btn btn-sm btn-outline-light"><i class="fas fa-share-alt"></i> Share</button>
+            </div>
+            <div class="card-body">
+                <div class="d-flex">
+                    <!-- Vote Buttons -->
+                    <div class="me-3 text-center" style="width: 40px;">
+                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-up"></i></button>
+                        <div class="my-1 fw-bold">24</div>
+                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-down"></i></button>
+                        <button class="btn text-success mt-2 p-0" title="Bookmark"><i class="far fa-bookmark"></i></button>
+                    </div>
+
+                    <!-- Question Content -->
+                    <div class="flex-grow-1">
+                        <div class="mb-3">
+                            I do not know the code for it as I am a beginner. As an example what I need to do is like there is a column 1 containing First name, and column 2 consists of last name I want a column to combine.
+                        </div>
+
+                        <div class="mb-3">
+                            <pre><code class="language-sql">-- Example SQL
+SELECT CONCAT(first_name, ' ', last_name) AS full_name 
+FROM users;</code></pre>
+                        </div>
+
+                        <div class="tags mb-3">
+                            <span class="badge tag me-1">sql</span>
+                            <span class="badge tag me-1">database</span>
+                            <span class="badge tag me-1">beginner</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between text-muted">
+                            <div>
+                                <a href="#" class="text-decoration-none">Share</a> • 
+                                <a href="#" class="text-decoration-none">Edit</a> • 
+                                <a href="#" class="text-decoration-none">Follow</a>
+                            </div>
+                            <div class="text-end">
+                                <small>Asked 2 hours ago by <a href="#" class="text-decoration-none">user123</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Answers Section -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>3 Answers</h4>
+            <div class="btn-group">
+                <button class="btn btn-sm btn-outline-secondary active">Active</button>
+                <button class="btn btn-sm btn-outline-secondary">Oldest</button>
+                <button class="btn btn-sm btn-outline-secondary">Votes</button>
+            </div>
+        </div>
+
+        <!-- Answer 1 (Accepted) -->
+        <div class="card mb-3 accepted-answer">
+            <div class="card-body">
+                <div class="d-flex">
+                    <!-- Vote Buttons -->
+                    <div class="me-3 text-center" style="width: 40px;">
+                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-up"></i></button>
+                        <div class="my-1 fw-bold">15</div>
+                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-down"></i></button>
+                        <div class="mt-2 text-success"><i class="fas fa-check"></i></div>
+                    </div>
+
+                    <!-- Answer Content -->
+                    <div class="flex-grow-1">
+                        <div class="mb-3">
+                            <p>In SQL, you have several options to concatenate columns:</p>
+                            <ol>
+                                <li>The <code>||</code> operator (in some databases like PostgreSQL):</li>
+                                <pre><code class="language-sql">SELECT first_name || ' ' || last_name AS full_name FROM users;</code></pre>
+
+                                <li>The <code>+</code> operator (in SQL Server):</li>
+                                <pre><code class="language-sql">SELECT first_name + ' ' + last_name AS full_name FROM users;</code></pre>
+
+                                <li>The <code>CONCAT</code> function (standard SQL):</li>
+                                <pre><code class="language-sql">SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM users;</code></pre>
+                            </ol>
+                        </div>
+
+                        <div class="d-flex justify-content-between text-muted">
+                            <div>
+                                <a href="#" class="text-decoration-none">Share</a> • 
+                                <a href="#" class="text-decoration-none">Edit</a>
+                            </div>
+                            <div class="text-end">
+                                <small>Answered 1 hour ago by <a href="#" class="text-decoration-none">SQLExpert</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Answer 2 -->
+        <div class="card mb-3 answer-card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <!-- Vote Buttons -->
+                    <div class="me-3 text-center" style="width: 40px;">
+                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-up"></i></button>
+                        <div class="my-1 fw-bold">5</div>
+                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-down"></i></button>
+                    </div>
+
+                    <!-- Answer Content -->
+                    <div class="flex-grow-1">
+                        <div class="mb-3">
+                            <p>For MySQL specifically, you can use:</p>
+                            <pre><code class="language-sql">SELECT CONCAT_WS(' ', first_name, last_name) AS full_name FROM users;</code></pre>
+                            <p>The <code>CONCAT_WS</code> function automatically handles NULL values and adds the separator between non-NULL values.</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between text-muted">
+                            <div>
+                                <a href="#" class="text-decoration-none">Share</a> • 
+                                <a href="#" class="text-decoration-none">Edit</a>
+                            </div>
+                            <div class="text-end">
+                                <small>Answered 30 minutes ago by <a href="#" class="text-decoration-none">MySQLUser</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your Answer Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5><i class="fas fa-pen me-2"></i>Your Answer</h5>
+            </div>
+            <div class="card-body">
+                <form id="answerForm">
+                    <div class="mb-3">
+                        <div class="editor-toolbar mb-0 p-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-cmd="bold"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-cmd="italic"><i class="fas fa-italic"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-cmd="insertunorderedlist"><i class="fas fa-list-ul"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-cmd="insertorderedlist"><i class="fas fa-list-ol"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-cmd="createlink"><i class="fas fa-link"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="uploadImage"><i class="fas fa-image"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="addCode"><i class="fas fa-code"></i></button>
+                        </div>
+                        <div class="editor-content" id="answerContent" contenteditable="true"></div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane me-2"></i>Post Your Answer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize syntax highlighting
+            hljs.highlightAll();
+
+            // Initialize editor functionality
+            initEditor();
+
+            // Voting system
+            document.querySelectorAll('.vote-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const voteCount = this.parentElement.querySelector('.fw-bold');
+                    if (this.querySelector('.fa-arrow-up')) {
+                        voteCount.textContent = parseInt(voteCount.textContent) + 1;
+                    } else {
+                        voteCount.textContent = parseInt(voteCount.textContent) - 1;
+                    }
+                });
+            });
+
+            // Form submission
+            document.getElementById('answerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const content = document.getElementById('answerContent').innerHTML;
+                if (content.trim() === '') {
+                    alert('Please write your answer before submitting');
+                    return;
+                }
+
+                // In a real app, you would send to your backend API
+                console.log('Submitting answer:', content);
+                alert('Answer submitted successfully!');
+                this.reset();
+                document.getElementById('answerContent').innerHTML = '';
+            });
+        });
+
+        function initEditor() {
+            const editor = document.getElementById('answerContent');
+
+            // Toolbar buttons
+            document.querySelectorAll('[data-cmd]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const cmd = this.getAttribute('data-cmd');
+                    if (cmd === 'createlink') {
+                        const url = prompt('Enter URL:');
+                        if (url) document.execCommand(cmd, false, url);
+                    } else {
+                        document.execCommand(cmd, false, null);
+                    }
+                    editor.focus();
+                });
+            });
+
+            // Image Upload (using ImgBB API)
+            document.getElementById('uploadImage').addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = async () => {
+                    const file = input.files[0];
+                    const formData = new FormData();
+                    formData.append('image', file);
+
+                    try {
+                        // Replace with your actual ImgBB API key
+                        const response = await fetch('https://api.imgbb.com/1/upload?key=YOUR_IMGBB_API_KEY', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const data = await response.json();
+                        document.execCommand('insertImage', false, data.data.url);
+                    } catch (error) {
+                        console.error('Image upload failed:', error);
+                        alert('Image upload failed. Please try again.');
+                    }
+                };
+                input.click();
+            });
+
+            // Code Block (using Highlight.js)
+            document.getElementById('addCode').addEventListener('click', function() {
+                const language = prompt('Enter language (sql, javascript, etc):', 'sql');
+                const code = prompt('Enter your code:');
+                if (code) {
+                    const codeBlock = `<pre><code class="language-${language}">${code}</code></pre>`;
+                    document.execCommand('insertHTML', false, codeBlock);
+                    hljs.highlightAll();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
