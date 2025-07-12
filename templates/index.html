@@ -21,11 +21,11 @@
 
         a {
             text-decoration: none;
-            color: #0077cc;
+            color: #2e7d32; /* Changed from blue to green */
         }
 
         a:hover {
-            color: #005fa3;
+            color: #1b5e20; /* Darker green */
         }
 
         .container {
@@ -53,7 +53,7 @@
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #0077cc;
+            color: #2e7d32; /* Changed from blue to green */
         }
 
         .search-bar {
@@ -76,11 +76,11 @@
         }
 
         .login {
-            color: #0077cc;
+            color: #2e7d32; /* Changed from blue to green */
         }
 
         .signup {
-            background-color: #0077cc;
+            background-color: #2e7d32; /* Changed from blue to green */
             color: white;
         }
 
@@ -114,19 +114,19 @@
         .filter-tabs a {
             padding: 8px 15px;
             margin-right: 5px;
-            background-color: #e1ecf4;
-            color: #39739d;
+            background-color: #e8f5e9; /* Light green background */
+            color: #1b5e20; /* Dark green text */
             border-radius: 4px;
             font-size: 14px;
         }
 
         .filter-tabs a.active {
-            background-color: #0077cc;
+            background-color: #2e7d32; /* Green */
             color: white;
         }
 
         .ask-question-btn {
-            background-color: #0095ff;
+            background-color: #43a047; /* Green */
             color: white;
             padding: 8px 15px;
             border-radius: 4px;
@@ -168,8 +168,8 @@
         }
 
         .tag {
-            background-color: #e1ecf4;
-            color: #39739d;
+            background-color: #e8f5e9; /* Light green background */
+            color: #1b5e20; /* Dark green text */
             padding: 3px 8px;
             margin-right: 5px;
             margin-bottom: 5px;
@@ -212,13 +212,13 @@
             margin: 0 5px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            color: #0077cc;
+            color: #2e7d32; /* Changed from blue to green */
         }
 
         .pagination a.active {
-            background-color: #0077cc;
+            background-color: #2e7d32; /* Changed from blue to green */
             color: white;
-            border-color: #0077cc;
+            border-color: #2e7d32; /* Changed from blue to green */
         }
 
         /* Responsive Styles */
@@ -385,7 +385,7 @@
                     e.preventDefault();
                     filterTabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    // Here we can typically load filtered questions via AJAX
+                    // Here you would typically load filtered questions via AJAX
                 });
             });
 
@@ -402,7 +402,7 @@
                 if (e.key === 'Enter') {
                     // Perform search
                     console.log('Searching for:', this.value);
-                    // Typically we can redirect to search results or load via AJAX
+                    // Typically you would redirect to search results or load via AJAX
                 }
             });
         });
