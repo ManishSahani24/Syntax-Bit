@@ -87,7 +87,7 @@
         <!-- Question Section -->
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4>How to join 2 columns in a data set to make a separate column in SQL</h4>
+                <h4>{{ question.title }}</h4>
                 <button class="btn btn-sm btn-outline-light"><i class="fas fa-share-alt"></i> Share</button>
             </div>
             <div class="card-body">
@@ -103,7 +103,7 @@
                     <!-- Question Content -->
                     <div class="flex-grow-1">
                         <div class="mb-3">
-                            I do not know the code for it as I am a beginner. As an example what I need to do is like there is a column 1 containing First name, and column 2 consists of last name I want a column to combine.
+                             {{ question.description | safe }}
                         </div>
 
                         <div class="mb-3">
@@ -113,9 +113,9 @@ FROM users;</code></pre>
                         </div>
 
                         <div class="tags mb-3">
-                            <span class="badge tag me-1">sql</span>
-                            <span class="badge tag me-1">database</span>
-                            <span class="badge tag me-1">beginner</span>
+                            {% for tag in question.tags %}
+                            <span class="badge tag me-1">{{ tag }}</span>
+                            {% endfor %}
                         </div>
 
                         <div class="d-flex justify-content-between text-muted">
@@ -125,7 +125,7 @@ FROM users;</code></pre>
                                 <a href="#" class="text-decoration-none">Follow</a>
                             </div>
                             <div class="text-end">
-                                <small>Asked 2 hours ago by <a href="#" class="text-decoration-none">user123</a></small>
+                                <small>Asked {{ question.timestamp.strftime('%b %d, %Y %H:%M') }} by <a href="#" class="text-decoration-none">user123</a></small>
                             </div>
                         </div>
                     </div>
@@ -144,79 +144,31 @@ FROM users;</code></pre>
         </div>
 
         <!-- Answer 1 (Accepted) -->
-        <div class="card mb-3 accepted-answer">
-            <div class="card-body">
-                <div class="d-flex">
-                    <!-- Vote Buttons -->
-                    <div class="me-3 text-center" style="width: 40px;">
-                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-up"></i></button>
-                        <div class="my-1 fw-bold">15</div>
-                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-down"></i></button>
-                        <div class="mt-2 text-success"><i class="fas fa-check"></i></div>
-                    </div>
-
-                    <!-- Answer Content -->
-                    <div class="flex-grow-1">
-                        <div class="mb-3">
-                            <p>In SQL, you have several options to concatenate columns:</p>
-                            <ol>
-                                <li>The <code>||</code> operator (in some databases like PostgreSQL):</li>
-                                <pre><code class="language-sql">SELECT first_name || ' ' || last_name AS full_name FROM users;</code></pre>
-
-                                <li>The <code>+</code> operator (in SQL Server):</li>
-                                <pre><code class="language-sql">SELECT first_name + ' ' + last_name AS full_name FROM users;</code></pre>
-
-                                <li>The <code>CONCAT</code> function (standard SQL):</li>
-                                <pre><code class="language-sql">SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM users;</code></pre>
-                            </ol>
-                        </div>
-
-                        <div class="d-flex justify-content-between text-muted">
-                            <div>
-                                <a href="#" class="text-decoration-none">Share</a> • 
-                                <a href="#" class="text-decoration-none">Edit</a>
-                            </div>
-                            <div class="text-end">
-                                <small>Answered 1 hour ago by <a href="#" class="text-decoration-none">SQLExpert</a></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Answers Section -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>{{ answers|length }} Answers</h4>
+            <div class="btn-group">
+                <button class="btn btn-sm btn-outline-secondary active">Active</button>
+                <button class="btn btn-sm btn-outline-secondary">Oldest</button>
+                <button class="btn btn-sm btn-outline-secondary">Votes</button>
             </div>
         </div>
 
-        <!-- Answer 2 -->
-        <div class="card mb-3 answer-card">
-            <div class="card-body">
-                <div class="d-flex">
-                    <!-- Vote Buttons -->
-                    <div class="me-3 text-center" style="width: 40px;">
-                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-up"></i></button>
-                        <div class="my-1 fw-bold">5</div>
-                        <button class="btn vote-btn p-0"><i class="fas fa-arrow-down"></i></button>
-                    </div>
-
-                    <!-- Answer Content -->
-                    <div class="flex-grow-1">
-                        <div class="mb-3">
-                            <p>For MySQL specifically, you can use:</p>
-                            <pre><code class="language-sql">SELECT CONCAT_WS(' ', first_name, last_name) AS full_name FROM users;</code></pre>
-                            <p>The <code>CONCAT_WS</code> function automatically handles NULL values and adds the separator between non-NULL values.</p>
-                        </div>
-
-                        <div class="d-flex justify-content-between text-muted">
-                            <div>
-                                <a href="#" class="text-decoration-none">Share</a> • 
-                                <a href="#" class="text-decoration-none">Edit</a>
-                            </div>
-                            <div class="text-end">
-                                <small>Answered 30 minutes ago by <a href="#" class="text-decoration-none">MySQLUser</a></small>
-                            </div>
-                        </div>
+        {% for ans in answers %}
+            <div class="card mb-3 answer-card">
+                <div class="card-body">
+                    <div>{{ ans.content | safe }}</div>
+                    <div class="text-end text-muted mt-2">
+                        <small>Answered by {{ ans.author_name }}</small>
                     </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <p>No answers yet.</p>
+        {% endfor %}
+
+
+        
 
         <!-- Your Answer Section -->
         <div class="card mb-4">

@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from forms import LoginForm, RegisterForm, AskQuestionForm
 from models import db, User
-from models import Question, db 
+from models import Question, db, Answer
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
@@ -74,6 +74,12 @@ def ask_question():
         flash('Your question has been posted!', 'success')
         return redirect(url_for('home'))
     return render_template('ask.html', form=form)
+
+@app.route('/question/<int:question_id>')
+def question_detail(question_id):
+    question = Question.query.get_or_404(question_id)
+    answers = Answer.query.filter_by(question_id=question.id).all()
+    return render_template('answer.html', question=question, answers=answers)
 
 
 if __name__ == '__main__':

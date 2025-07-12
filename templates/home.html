@@ -271,10 +271,15 @@
             {% for question in questions %}
             <div class="question-summary">
                 <h3 class="question-title">
-                    <a href="#">{{ question.title }}</a>
+                    <a href="{{ url_for('question_detail', question_id=question.id) }}">{{ question.title }}</a>
                 </h3>
                 <div class="question-excerpt">
                     {{ question.description[:200] }}...
+                </div>
+                <div class="tags">
+                    {% for tag in question.tags %}
+                        <span class="tag">{{ tag }}</span>
+                    {% endfor %}
                 </div>
                 <div class="question-meta">
                     <span>Asked {{ question.timestamp.strftime('%b %d, %Y %H:%M') }}</span>
