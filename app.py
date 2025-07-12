@@ -56,7 +56,8 @@ def logout():
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    questions = Question.query.order_by(Question.timestamp.desc()).all()
+    return render_template('home.html', questions=questions)
 
 @app.route('/ask', methods=['GET', 'POST'])
 @login_required

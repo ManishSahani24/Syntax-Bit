@@ -268,23 +268,21 @@
                 <button class="ask-question-btn">Ask New question</button>
             </div>
 
+            {% for question in questions %}
             <div class="question-summary">
                 <h3 class="question-title">
-                    <a href="#">How to join 2 columns in a data set to make a separate column in SQL</a>
+                    <a href="#">{{ question.title }}</a>
                 </h3>
                 <div class="question-excerpt">
-                    I do not know the code for it as I am a beginner. As an example what I need to do is like there is a column 1 containing First name, and column 2 consists of last name I want a column to combine...
-                </div>
-                <div class="tags">
-                    <a href="#" class="tag">sql</a>
-                    <a href="#" class="tag">database</a>
-                    <a href="#" class="tag">beginner</a>
+                    {{ question.description[:200] }}...
                 </div>
                 <div class="question-meta">
-                    <span>Asked 2 hours ago</span>
-                    <span>by <a href="#">user123</a></span>
+                    <span>Asked {{ question.timestamp.strftime('%b %d, %Y %H:%M') }}</span>
                 </div>
-            </div>
+                </div>
+                {% else %}
+                <p>No questions posted yet.</p>
+                {% endfor %}
 
             <div class="question-summary">
                 <h3 class="question-title">
