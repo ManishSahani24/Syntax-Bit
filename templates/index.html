@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StackIt - Q&A Platform</title>
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0077cc;
+        }
+
+        a:hover {
+            color: #005fa3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #f8f9fa;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0077cc;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .auth-buttons a {
+            margin-left: 10px;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        .login {
+            color: #0077cc;
+        }
+
+        .signup {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .questions-container {
+            flex: 3;
+            margin-right: 20px;
+        }
+
+        .sidebar {
+            flex: 1;
+        }
+
+        /* Question List Styles */
+        .question-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-tabs {
+            display: flex;
+        }
+
+        .filter-tabs a {
+            padding: 8px 15px;
+            margin-right: 5px;
+            background-color: #e1ecf4;
+            color: #39739d;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .filter-tabs a.active {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        .ask-question-btn {
+            background-color: #0095ff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .question-summary {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .question-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .question-excerpt {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            background-color: #e1ecf4;
+            color: #39739d;
+            padding: 3px 8px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-widget {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #666;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .tag-list a {
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .pagination a {
+            padding: 8px 15px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #0077cc;
+        }
+
+        .pagination a.active {
+            background-color: #0077cc;
+            color: white;
+            border-color: #0077cc;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            .search-bar {
+                margin: 10px 0;
+                width: 100%;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .questions-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">StackIt</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="auth-buttons">
+                <a href="#" class="login">Log in</a>
+                <a href="#" class="signup">Sign up</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="questions-container">
+            <div class="question-list-header">
+                <div class="filter-tabs">
+                    <a href="#" class="active">Newest</a>
+                    <a href="#">Unanswered</a>
+                    <a href="#">More</a>
+                </div>
+                <button class="ask-question-btn">Ask New question</button>
+            </div>
+
+            <div class="question-summary">
+                <h3 class="question-title">
+                    <a href="#">How to join 2 columns in a data set to make a separate column in SQL</a>
+                </h3>
+                <div class="question-excerpt">
+                    I do not know the code for it as I am a beginner. As an example what I need to do is like there is a column 1 containing First name, and column 2 consists of last name I want a column to combine...
+                </div>
+                <div class="tags">
+                    <a href="#" class="tag">sql</a>
+                    <a href="#" class="tag">database</a>
+                    <a href="#" class="tag">beginner</a>
+                </div>
+                <div class="question-meta">
+                    <span>Asked 2 hours ago</span>
+                    <span>by <a href="#">user123</a></span>
+                </div>
+            </div>
+
+            <div class="question-summary">
+                <h3 class="question-title">
+                    <a href="#">Question Title</a>
+                </h3>
+                <div class="question-excerpt">
+                    Question description...
+                </div>
+                <div class="tags">
+                    <a href="#" class="tag">tag1</a>
+                    <a href="#" class="tag">tag2</a>
+                </div>
+                <div class="question-meta">
+                    <span>Asked 5 hours ago</span>
+                    <span>by <a href="#">User Name</a></span>
+                </div>
+            </div>
+
+            <div class="question-summary">
+                <h3 class="question-title">
+                    <a href="#">Another Question</a>
+                </h3>
+                <div class="question-excerpt">
+                    Another question description...
+                </div>
+                <div class="tags">
+                    <a href="#" class="tag">tag3</a>
+                    <a href="#" class="tag">tag4</a>
+                </div>
+                <div class="question-meta">
+                    <span>Asked 1 day ago</span>
+                    <span>by <a href="#">User Name</a></span>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="sidebar-title">Popular Tags</h3>
+                <div class="tag-list">
+                    <a href="#" class="tag">javascript</a>
+                    <a href="#" class="tag">python</a>
+                    <a href="#" class="tag">java</a>
+                    <a href="#" class="tag">c#</a>
+                    <a href="#" class="tag">php</a>
+                    <a href="#" class="tag">html</a>
+                    <a href="#" class="tag">css</a>
+                    <a href="#" class="tag">react</a>
+                    <a href="#" class="tag">angular</a>
+                    <a href="#" class="tag">vue</a>
+                    <a href="#" class="tag">node.js</a>
+                    <a href="#" class="tag">sql</a>
+                </div>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="sidebar-title">Top Users</h3>
+                <div class="user-list">
+                    <div class="user-item">
+                        <a href="#">User1</a> - 12,345 points
+                    </div>
+                    <div class="user-item">
+                        <a href="#">User2</a> - 10,987 points
+                    </div>
+                    <div class="user-item">
+                        <a href="#">User3</a> - 9,876 points
+                    </div>
+                    <div class="user-item">
+                        <a href="#">User4</a> - 8,765 points
+                    </div>
+                    <div class="user-item">
+                        <a href="#">User5</a> - 7,654 points
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Basic interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter tabs functionality
+            const filterTabs = document.querySelectorAll('.filter-tabs a');
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    // Here you would typically load filtered questions via AJAX
+                });
+            });
+
+            // Ask question button
+            const askQuestionBtn = document.querySelector('.ask-question-btn');
+            askQuestionBtn.addEventListener('click', function() {
+                // Redirect to ask question page or show modal
+                window.location.href = '/ask';
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    // Perform search
+                    console.log('Searching for:', this.value);
+                    // Typically you would redirect to search results or load via AJAX
+                }
+            });
+        });
+    </script>
+</body>
+</html>
