@@ -385,7 +385,7 @@
                     e.preventDefault();
                     filterTabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    // Here you would typically load filtered questions via AJAX
+                    // Here we can typically load filtered questions via AJAX
                 });
             });
 
@@ -402,7 +402,7 @@
                 if (e.key === 'Enter') {
                     // Perform search
                     console.log('Searching for:', this.value);
-                    // Typically you would redirect to search results or load via AJAX
+                    // Typically we can redirect to search results or load via AJAX
                 }
             });
         });
