@@ -54,9 +54,9 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/')
-@login_required
 def home():
-    return f'Welcome, {current_user.username}!'
+    return render_template('home.html')
+
 
 if __name__ == '__main__':
     with app.app_context():
